@@ -30,11 +30,78 @@ const getRandomInt = (min, max) => {
 
 const generateHint = () =>  {
   // your code here
+  // Creates array from guess to compare
+  let guessArray = guess.split('');
+
+  // Creates array from solution
+  let solutionArray = solution.split('');
+
+   // Counter for  correct Letter
+  let correctLetter = 0;
+
+  // Counter for wrong letter
+  let correctPlace = 0; 
+
+  // Creates for loop to compare letter for solution
+  for(let i =0; i<4; i++){ 
+    //if both are same in the same index increase counter
+    // If both are the same in the index counter, change the guess array to 1 so it won't be input again, or  change the solutio so it isn't saved aain
+    if(guessArray[i]===solutionArray[i]){
+      correctPlace++;
+      guessArray[i] = 1; 
+      solutionArray[i] = 0; 
+
+       // Print counter with correct value
+      console.log(`correctPlace is ${correctPlace}`);
+    };
+  };
+
+  // Loop for solutaions, run look to guess each letter, print how many times it loops, print whats being compared
+  for(let i =0; i<4; i++){ 
+    for(let ii=0; ii<4; ii++){
+      console.log(`run ${ii} times`);
+
+      console.log(`guessArray is ${guessArray[ii]}, and solutionArray is ${solutionArray[i]}`);
+
+      // If right letter is wrong increase counter, change guess away to be counted, change solurion array so it can be counted.
+      if(guessArray[ii]===solutionArray[i]){
+        correctLetter++; 
+        guessArray[ii] = 1; 
+        solutionArray[i] = 0; 
+        console.log(`correctLetter is ${correctLetter}`);
+      };
+    };
+  };
+
+  return `${correctPlace}-${correctLetter}`;
+
+}
 }
 
 const mastermind = (guess) => {
+
   solution = 'abcd'; // Comment this out to generate a random solution
   // your code here
+
+  // Hint should be (0-0) then place in guess
+  let hint = generateHint(guess);
+  
+  // Place hint and guess together
+  let guessPlus = guess+' '+hint;
+
+  // Place guess to the board 
+  board.push(guessPlus);
+
+  // Win conditions to compare solution and guess, if the guess equals solution then return win! Or return false
+  if(guess === solution){ 
+    console.log("You guessed it!");
+    return 'You guessed it!';
+  }else{ 
+    return false;
+  }
+}
+
+
 }
 
 
